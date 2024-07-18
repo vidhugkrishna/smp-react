@@ -1,13 +1,12 @@
-import React from 'react';
-import logo from './logo.svg';
 import './App.css';
-import Join from './components/Join';
+
+import LoginPage from './pageComponents/LoginPage';
 
 function App() {
   return (
     <div className="App">
       <div>
-        <Join></Join>
+        <LoginPage/>
       </div>
     </div>
   );
