@@ -1,23 +1,28 @@
 import { FC } from "react";
 
 interface ContainerComponentProps {
-    width:number;
+    width?:number;
+    height?:number;
+    padding?:number;
     color?:string;
     justifyContent?:string;
+    alignItems?:string;
     children:React.ReactNode;
 
 }
 
 
-const Container:FC<ContainerComponentProps> = ({width,color,justifyContent,children})=>{
+const Container:FC<ContainerComponentProps> = ({width,height,padding,color,justifyContent,alignItems,children})=>{
     const containerStyle: React.CSSProperties = {
         display:'flex',
         width:width+"%",
+        height:height+"vh",
         backgroundColor: color || 'transparent',
-        padding: '20px',
+        padding: padding+"px",
         border: '1px solid #ccc',
         borderRadius: '5px',
-        justifyContent
+        justifyContent,
+        alignItems
       };
 
     return  (
