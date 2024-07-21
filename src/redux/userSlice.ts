@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface UserState {
+  id:string;
   name: string;
   login:boolean;
   token:string;
@@ -9,6 +10,7 @@ interface UserState {
 
 
 const initialState: UserState = {
+    id:"",
     name: "",
     login:false,
     token:""
@@ -19,6 +21,7 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     addUser(state, action: PayloadAction<UserState>) {
+      state.id = action.payload.id
       state.name = action.payload.name;
       state.login = action.payload.login;
       state.token = action.payload.token;
@@ -27,11 +30,11 @@ const userSlice = createSlice({
 }
 );
 
-const valueTestSlice = createSlice({
-  name: 'val',
-  initialState:"",
+const appStateSlice = createSlice({
+  name: 'appState',
+  initialState:"login",
   reducers: {
-    updteVal(state, action: PayloadAction<string>) {
+    updateSta(state, action: PayloadAction<string>) {
       return state = action.payload;
 
     },
@@ -40,7 +43,7 @@ const valueTestSlice = createSlice({
 );
 
 export const { addUser } = userSlice.actions;
-export const { updteVal } = valueTestSlice.actions;
+export const { updateSta } = appStateSlice.actions;
 
 export const userReducer=  userSlice.reducer;
-export  const valueTestReducer = valueTestSlice.reducer;
+export  const appStateReducer = appStateSlice.reducer;
