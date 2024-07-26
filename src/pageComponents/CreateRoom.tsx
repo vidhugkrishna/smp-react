@@ -8,7 +8,7 @@ import Container from "../components/Container"
 import { useDispatch,useSelector } from "react-redux"
 import { RootState,AppDispatch } from "../redux/store"
 import { addUser ,updateSta} from "../redux/userSlice"
-import { postUserApi } from "../fetch/userApi"
+import { postUserApi,createRoom } from "../fetch/userApi"
 
 const CreateRoom:FC = ()=>{
     const user = useSelector((state:RootState)=> state.user)
@@ -44,7 +44,10 @@ const CreateRoom:FC = ()=>{
     const cardArray:string[] = ["ace","2","3","5","8","King"]
     const tshirtArray:string[] = ["xs","s","m","l","xl","xxl"]
 
+    var inputCards:string[] =[]
+
     const [formDate, setFormData] = useState<body>(initialState);
+    
 
 
     const handleInputUpdate=(e: ChangeEvent<HTMLSelectElement>)=>{
@@ -56,9 +59,37 @@ const CreateRoom:FC = ()=>{
     }
 
     const checkBoxHandler=(e:  ChangeEvent<HTMLInputElement>)=>{
-        var checkedBool =e.target.checked
-        console.log("checkedBool",checkedBool)
-        e.target.checked=!checkedBool
+        var item:string = e.target.value
+        console.log("condition1",inputCards.includes(item))
+        if(inputCards.indexOf(item)!==-1){
+            console.log("condition2",inputCards.indexOf(item))
+            inputCards = inputCards.splice(inputCards.indexOf(item),-1)
+        }else{
+            inputCards.push(item)
+        }
+        console.log("inputCards",inputCards)     
+    }
+
+    const adminCheckBoxHandler=(e:ChangeEvent<HTMLInputElement>)=>{
+        setFormData({...formDate,accessToAddStory:e.target.checked})
+        
+    }
+
+    const votingStatusCheckBoxHandler=(e:ChangeEvent<HTMLInputElement>)=>{
+        setFormData({...formDate,votingStatus:e.target.checked})
+        
+    }
+
+    const showVoteCheckBoxHandler=(e:ChangeEvent<HTMLInputElement>)=>{
+        setFormData({...formDate,voteRevealedAtEnd:e.target.checked})
+        
+    }
+
+    const submitForm=async (e:ChangeEvent<HTMLInputElement>)=>{
+        console.log("inputCrads",inputCards)
+        setFormData({...formDate,cards:inputCards})
+        console.log("body",formDate)
+        const createRomm = await createRoom(formDate);
         
     }
 
@@ -107,30 +138,26 @@ const CreateRoom:FC = ()=>{
                     {cardItemSwitch(formDate.roomType).map((item: string) => (
                         <Container>
                             <div> 
-                            <input  type="checkbox"  value={item} checked={false} name="enter_stories" onChange={checkBoxHandler}/>{item}
-                        <label/>
+                            <TextInput updateFunc={checkBoxHandler} inputLabel={item} type="checkbox" placeholder={""} value={item}></TextInput>
+                            
+                        
                         </div>
                         </Container>))}
                 
                 </Container>
                 <Spacer height={30}></Spacer>
                 <Container flexDirection={'column'} alignItems="flex-start">
-                <label>
-                    <input type="checkbox" name="enter_stories" /> Do you want to enter stories in this room?
-                </label>
+                    <TextInput updateFunc={adminCheckBoxHandler} inputLabel="Do you want to enter stories in this room?" type="checkbox" placeholder={""}></TextInput>
                 <br />
-                <label>
-                    <input type="checkbox" name="request_confirmation" /> Do you want to show voting
-                </label>
+                <TextInput updateFunc={votingStatusCheckBoxHandler} inputLabel="Do you want to show voting" type="checkbox" placeholder={""}></TextInput>
                 <br />
-                <label>
-                    <input type="checkbox" name="observe_realtime" /> Do you want observers to see other players voting in real time?
-                </label>
+                <TextInput updateFunc={showVoteCheckBoxHandler} inputLabel="Do you want observers to see other players voting in real time?" type="checkbox" placeholder={""}></TextInput>
+            
 
                 </Container>
                 <Spacer height={30}></Spacer>
                 <Container justifyContent="center">
-                <Button onClick={() => console.log("d")} label={"Create"}></Button>
+                <Button onClick={submitForm} label={"Create"}></Button>
                 <Button onClick={() => dispatch(updateSta("selection"))} label={"Cancel"}></Button>
 
                 </Container>
