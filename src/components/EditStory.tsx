@@ -15,7 +15,7 @@ const EditStory:FC=()=>{
             
             <Container width={20}> 
                 
-                {user.login ? <p>{user.name}</p> : <a>login</a>}
+                {user.login ? <p>{user.username}</p> : <a>login</a>}
             </Container>
             
         </Container>

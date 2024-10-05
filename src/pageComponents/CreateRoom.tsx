@@ -1,4 +1,4 @@
-import { ChangeEvent, FC, SyntheticEvent, useState } from "react"
+import { ChangeEvent, FC, SyntheticEvent, useState,useEffect } from "react"
 import Title from "../components/Title"
 import TextInput from "../components/TextInput"
 import Button from "../components/Button"
@@ -9,11 +9,23 @@ import { useDispatch,useSelector } from "react-redux"
 import { RootState,AppDispatch } from "../redux/store"
 import { addUser ,updateSta} from "../redux/userSlice"
 import { postUserApi,createRoom } from "../fetch/userApi"
+import { sendMessage } from "../fetch/wsApi"
+import {joinRoom} from "../redux/roomSlice"
+import './createroom.css'
+
+export interface messageBody {
+            sender:string;
+            roomId:string;
+            responseType:string;
+            message:string;
+        }
+
 
 const CreateRoom:FC = ()=>{
     const user = useSelector((state:RootState)=> state.user)
     const appState = useSelector((state:RootState)=> state.appState)
     const dispatch:AppDispatch = useDispatch();
+    useEffect(()=>setFormData({...formDate,users:[user.Id+"-"+user.username]}),[])
 
     interface body {
         roomName:string;
@@ -23,8 +35,9 @@ const CreateRoom:FC = ()=>{
         accessToAddStory:boolean;
         votingStatus:boolean;
         voteRevealedAtEnd:boolean;
-    
+        users: string[];
     }
+
 
 
     const initialState:body = {
@@ -34,7 +47,8 @@ const CreateRoom:FC = ()=>{
         cards: [],
         accessToAddStory: true,
         votingStatus: true,
-        voteRevealedAtEnd: true
+        voteRevealedAtEnd: true,
+        users:[]
     }
 
     const scrumArray:string[] = ["0",".5","1","2","3","5","8","13","20","40"]
@@ -47,6 +61,7 @@ const CreateRoom:FC = ()=>{
     var inputCards:string[] =[]
 
     const [formDate, setFormData] = useState<body>(initialState);
+    const [cards, setCards] = useState<string[]>([])
     
 
 
@@ -59,16 +74,9 @@ const CreateRoom:FC = ()=>{
     }
 
     const checkBoxHandler=(e:  ChangeEvent<HTMLInputElement>)=>{
-        var item:string = e.target.value
-        console.log("condition1",inputCards.includes(item))
-        if(inputCards.indexOf(item)!==-1){
-            console.log("condition2",inputCards.indexOf(item))
-            inputCards = inputCards.splice(inputCards.indexOf(item),-1)
-        }else{
-            inputCards.push(item)
-        }
-        console.log("inputCards",inputCards)     
+        getSelectedCards()
     }
+
 
     const adminCheckBoxHandler=(e:ChangeEvent<HTMLInputElement>)=>{
         setFormData({...formDate,accessToAddStory:e.target.checked})
@@ -86,12 +94,30 @@ const CreateRoom:FC = ()=>{
     }
 
     const submitForm=async (e:ChangeEvent<HTMLInputElement>)=>{
-        console.log("inputCrads",inputCards)
-        setFormData({...formDate,cards:inputCards})
         console.log("body",formDate)
-        const createRomm = await createRoom(formDate);
-        
+        const createRoomJson = await createRoom(formDate);
+
+        console.log("jsonRoomObj.id",createRoomJson.id)
+        if(createRoomJson.id){
+           //connectRoom();
+           dispatch(joinRoom(createRoomJson))
+           dispatch(updateSta("joined"))
+        }
     }
+
+    const submitFormWS=(e:ChangeEvent<HTMLInputElement>)=>{
+            setFormData({...formDate,users:[user.Id+"-"+user.username]})
+            console.log("formDate",formDate)
+            let bodyStringMessage:string = JSON.stringify(formDate)
+            let message:messageBody={
+                sender:user.Id+"-"+user.username,
+                roomId:"creating",
+                responseType:'CREATEGROUP',
+                message:bodyStringMessage
+            }
+            console.log("submit form",bodyStringMessage)
+            const delayedSend = setTimeout(()=>(sendMessage("/app/creategroup",message),40))
+            }
 
 
     const cardItemSwitch=(roomType:string)=>{
@@ -114,15 +140,31 @@ const CreateRoom:FC = ()=>{
             
     }
 
+    const getSelectedCards=()=>{
+    let cardsList:string[] =[]
+        let cardElements = document.querySelectorAll(".cards .name-input")
+        cardElements.forEach((item,index)=>{
+        const checkboxEle = item as HTMLInputElement
+            if(checkboxEle.checked && checkboxEle.value!== null){
+                console.log(item)
+                cardsList[index]=checkboxEle.value
+            }
+        })
+        setFormData({...formDate,cards:cardsList})
+    }
+
 
 
     return (       
-        <><Container padding={50} justifyContent="center" alignItems="center">
+        <Container  color="#001e2b" justifyContent="center" alignItems="center" classNames="modal-wrapper" padding={30}>
             <div className="create-room-modal">
                 <Title titleTag={"h3"} text={"Create new room"}></Title>
-                <Container justifyContent={'space-between'}>
+                <Spacer height={20}></Spacer>
+                <Container classNames="name-row" justifyContent={'space-between'}>
+                    <Container width={60}>
                     <TextInput updateFunc={handleInputUpdate} inputLabel={""} placeholder={"Enter room name"} value={formDate.roomName}></TextInput>
-                    <div>
+                    </Container>
+                    <Container width={30}>
 
                         <select onChange={selectHandler} id="estimation" name="estimation">
                             <option value="scrum">Scrum</option>
@@ -132,12 +174,13 @@ const CreateRoom:FC = ()=>{
                             <option value="hours">Hours</option>
                             <option value="playing card">Playing Cards</option>
                         </select>
-                    </div>
+                    </Container>
                 </Container>
+                <p>Select the required cards for pointing</p>
                 <Container>
                     {cardItemSwitch(formDate.roomType).map((item: string) => (
-                        <Container>
-                            <div> 
+                        <Container >
+                            <div className="cards"> 
                             <TextInput updateFunc={checkBoxHandler} inputLabel={item} type="checkbox" placeholder={""} value={item}></TextInput>
                             
                         
@@ -156,15 +199,18 @@ const CreateRoom:FC = ()=>{
 
                 </Container>
                 <Spacer height={30}></Spacer>
-                <Container justifyContent="center">
-                <Button onClick={submitForm} label={"Create"}></Button>
+                <Container width={100} justifyContent="center">
+                <Container width={50} justifyContent="center">
+                <Button onClick={submitFormWS} label={"Create"}></Button>
+                </Container>
+                <Container width={50} justifyContent="center">
                 <Button onClick={() => dispatch(updateSta("selection"))} label={"Cancel"}></Button>
-
+                </Container>
                 </Container>
                 
             </div>
         </Container>
-        </>
+
     )
 }
 

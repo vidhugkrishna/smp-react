@@ -7,11 +7,14 @@ interface TitleComponentProps {
 
 
 const Title:FC<TitleComponentProps> = (props)=>{
-
+const titleStyle: React.CSSProperties = {
+        margin:'unset',
+        padding:'unset'
+      };
     const Tag = props.titleTag.toLowerCase() as keyof JSX.IntrinsicElements;
 
 
-    return  <Tag>{props.text}</Tag>
+    return  <Tag style={titleStyle}>{props.text}</Tag>
 }
 
 export default Title;

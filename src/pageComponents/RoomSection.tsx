@@ -7,6 +7,7 @@ import { addUser ,updateSta} from "../redux/userSlice"
 import { postUserApi } from "../fetch/userApi"
 import Container from "../components/Container"
 import Button from "../components/Button"
+import "./roomsection.css"
 
 const RoomSection:FC = ()=>{
     const user = useSelector((state:RootState)=> state.user)
@@ -27,14 +28,13 @@ const RoomSection:FC = ()=>{
 
 
     return (       
-        <Container  padding={50} justifyContent="center" alignItems="center">
-            <div className="room-modal">
-                <Container>
-                <Button onClick={()=>dispatch(updateSta("createRoom"))} label={"Create Room"}></Button>
-                <Button onClick={()=>dispatch(updateSta("joinRoom"))} label={"Join room"}></Button>
-                </Container>
-                
-            </div>
+        <Container classNames="roomselect-modal" width={80} padding={50} justifyContent="center" alignItems="center" color="#357960">
+
+            <Container width={100} justifyContent="center" >
+                <Button classNames="create-room" onClick={()=>dispatch(updateSta("createRoom"))} label={"Create Room"}></Button>
+                <Button classNames="join-room" onClick={()=>dispatch(updateSta("joinRoom"))} label={"Join room"}></Button>
+            </Container>
+
         </Container>
     )
 }
