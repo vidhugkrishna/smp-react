@@ -1,4 +1,5 @@
 {
+  "homepage": "https//vidhugkrishna.github.io/smp-react",
   "name": "smp",
   "version": "0.1.0",
   "private": true,
@@ -36,6 +37,8 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "predeploy": "npm run deploy",
+    "deploy": "gh-pages -d build",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -60,6 +63,7 @@
   },
   "devDependencies": {
     "@types/sockjs-client": "^1.5.4",
-    "@types/stompjs": "^2.3.9"
+    "@types/stompjs": "^2.3.9",
+    "gh-pages": "^6.1.1"
   }
 }
