@@ -1,27 +1,36 @@
-import { FC } from "react";
+import { FC ,useRef} from "react";
+
+type FlexDirection = 'row' | 'row-reverse' | 'column' | 'column-reverse';
 
 interface ContainerComponentProps {
-    width:number;
+    width?:number;
+    height?:number;
+    padding?:number;
     color?:string;
     justifyContent?:string;
+    alignItems?:string;
+    flexDirection?:FlexDirection;
     children:React.ReactNode;
+    classNames?:string;
 
 }
 
 
-const Container:FC<ContainerComponentProps> = ({width,color,justifyContent,children})=>{
+const Container:FC<ContainerComponentProps> = ({width,height,padding,color,justifyContent,alignItems,flexDirection,classNames,children})=>{
     const containerStyle: React.CSSProperties = {
         display:'flex',
         width:width+"%",
+        height:height+"%",
         backgroundColor: color || 'transparent',
-        padding: '20px',
-        border: '1px solid #ccc',
+        padding: padding+"px",
         borderRadius: '5px',
-        justifyContent
+        justifyContent,
+        alignItems,
+        flexDirection
       };
 
     return  (
-        <div className="container-wrapper" style={containerStyle}>
+        <div className={classNames} style={containerStyle}>
             {children}
         </div>
     )
