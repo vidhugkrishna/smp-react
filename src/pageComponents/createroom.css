@@ -1,0 +1,52 @@
+.modal-wrapper{
+    box-shadow: 20px 20px #00ED64;
+}
+.create-room-modal{
+    color:#00ED64;
+}
+
+.create-room-modal #input-item{
+    background-color:#00ED64;
+    box-shadow: 2px 2px white;
+    border:unset;
+}
+.create-room-modal input[type="checkbox"] {
+  accent-color: green;
+  box-shadow: 2px 2px #00ED64 !important;
+}
+
+.create-room-modal select {
+  -webkit-appearance: menulist-button;
+  color: #061621;
+  background-color: #00ED64;
+  border:unset;
+  box-shadow: 2px 2px white;
+}
+.create-room-modal p {
+  text-align:left;
+  margin-bottom:5px;
+  font-size:14px;
+}
+.create-room-modal .cards{
+    margin:5px;
+    font-weight:500;
+    border-radius:2px;
+}
+
+.create-room-modal button{
+    border:unset;
+    width:100%;
+    background-color:#00ED64;
+    box-shadow: 2px 2px white;
+}
+.create-room-modal .button-wrapper{
+    width:80%;
+}
+
+.create-room-modal .name-row .input-name-wrapper #input-item{
+    width:100%;
+}
+
+.create-room-modal .name-row .input-name-wrapper{
+    width:100%;
+}

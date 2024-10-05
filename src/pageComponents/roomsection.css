@@ -1,0 +1,33 @@
+.roomselect-modal{
+    @media (max-width: 600px) {
+          height: 60%;
+          width:90%;
+        }
+}
+.roomselect-modal button{
+    height: 50px;
+    width: 300px;
+    border:unset !important;
+    box-shadow: 10px 10px #F8F8FF;
+    background-color:#001E2B;
+    color:#00ED64;
+    text-shadow: 1px 1px white;
+    font-weight:600;
+    @media (max-width: 600px) {
+          width: 130px;
+        }
+}
+.roomselect-modal button:hover{
+    background-color:#00ED70;
+    color:white;
+    text-shadow: 2px 2px #001E2B;
+}
+
+.roomselect-modal input{
+    background-color:#001E2B;
+    height:30px;
+    width: 200px;
+    border: 2px solid #001E2B;
+    color: white;
+    box-shadow: 5px 5px #F8F8FF;
+}

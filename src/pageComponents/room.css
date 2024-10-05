@@ -1,0 +1,164 @@
+.room-body{
+    background-color: #061621 !important;
+    height:100vh !important;
+}
+.room-body h1{
+    color:#00ED64;
+    text-align: left;
+    padding-bottom: 30px !important;
+    @media (max-width: 600px) {
+       padding-left: 20px !important;
+       margin-top: 120px !important;
+            }
+}
+.room-body .admin-mes{
+    color: #00ED64 !important;
+}
+
+.room-body .cards{
+    background-color: #00ED64 !important;
+    @media (max-width: 600px) {
+
+            }
+}
+.card-h3{
+    color:white;
+    background-color: #00ED64 !important;
+    box-shadow: 2px 2px white;
+}
+.card{
+    box-shadow: 2px 2px white;
+}
+.addstory{
+    @media (max-width: 600px) {
+               margin-top:30px;
+               margin-bottom:30px;
+        }
+}
+.addstory h5{
+    color:#00ED64;
+    text-align: justify;
+}
+.addstory .input-name-wrapper input{
+    width:400px;
+    height:50px;
+    background-color: #C4DAD2 !important;
+    border:unset;
+    border-top-left-radius:10px;
+    border-bottom-left-radius:10px;
+    @media (max-width: 600px) {
+           width:250px;
+    }
+
+}
+
+
+.addstory button{
+    height:52px;
+    margin-top:36px;
+    width:100px;
+    border:unset;
+    border-top-right-radius:10px;
+    border-bottom-right-radius:10px;
+    color:black;
+    background-color:#00ED64;
+
+}
+
+.addstory button:hover{
+    color:#00ED64;
+    background-color:black;
+    font-weight: 600;
+}
+.Mui-selected{
+    color:#00ED64 !important;
+    border-bottom-color:#00ED64 !important;
+}
+
+.Mui-selected .MuiTouchRipple-root{
+    color:#00ED64 !important;
+    border-bottom-color:#00ED64 !important;
+}
+
+.story-wrapper{
+    display:flex;
+    flex-direction:row;
+    justify-content: space-between;
+    color:#00ED64;
+    background-image: linear-gradient(to right, rgba(255,0,0,0), rgba(255,255,255,.8));
+    margin-bottom:5px;
+
+}
+
+.story-wrapper button{
+    margin-left:50px;
+    width:100px;
+    border:unset;
+    color:black;
+    padding:5px;
+    background-color:#00ED64;
+}
+
+.story-wrapper button:hover{
+    color:#00ED64;
+    background-color:black;
+    font-weight: 600;
+}
+.MuiTabPanel-root{
+    overflow-y: scroll;
+    height: 250px;
+}
+.user-section h2{
+    color:#00ED64;
+    @media (max-width: 600px) {
+           text-align:left;
+        }
+}
+.user-section p{
+    font-weight: 600;
+}
+.user-section .user-tag{
+     background-image: linear-gradient(to right, rgba(255,0,0,0), rgba(255,255,255,.8));
+     margin-bottom:5px;
+   }
+.user-section .user-tag .vote{
+     color:black;
+}
+.admin-mes{
+    font-weight:600;
+    font-size:20px;
+}
+.svp-card-wrapper{
+    overflow-x: scroll;
+    height:180px;
+    padding-left:20px;
+    margin-bottom:30px;
+}
+.svp-user-section{
+    margin: 0px 20px 0px 20px;
+}
+.MuiTabs-centered .MuiTab-root{
+    @media (max-width: 600px) {
+       font-size:16px !important;
+    }
+}
+.current-story button{
+    padding:5px;
+    margin-right:30px;
+    font-weight:600;
+    width:100px;
+    height:60%;
+    border:unset;
+    color:black;
+    background-color:#00ED64;
+}
+.current-story button:hover{
+    color:#00ED64;
+    background-color:black;
+    font-weight: 600;
+}
+.MuiChartsLegend-root text{
+        color: white !important;
+        fill: white !important;
+        font-weight: 800 !important;
+}

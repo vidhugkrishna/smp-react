@@ -1,0 +1,32 @@
+.nav{
+    border-radius:unset !important;
+    color:#00ED64;
+    min-height:50px;
+}
+.nav p{
+    padding-right:25px;
+    font-weight:600;
+}
+.nav button{
+    line-height: 100%;
+    padding: 5px;
+    height: 25px;
+    margin-right: 25px;
+    margin-top: auto;
+    margin-bottom: auto;
+    border-radius:5px;
+    background-color:#00ED64;
+    font-weight:600;
+}
+.login-button{
+    border-radius:5px;
+    background-color:#061621;
+    margin-right:30px;
+    margin-top:30px;
+    padding: 20px;
+    color:white;
+}
+
+.login-button:hover{
+   box-shadow: 10px 10px #00ED64;
+}

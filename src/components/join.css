@@ -1,0 +1,117 @@
+
+.auth-wrapper {
+    width: 50%;
+    border: unset !important;
+    display:flex;
+    flex-direction:row;
+    justify-content:center;
+    align-items:center;
+    @media (max-width: 500px) {
+      width: 75%;
+    }
+}
+.auth-wrapper .modal {
+    display:flex;
+    flex-direction:column;
+    padding: 20px;
+    border-radius: 5px;
+}
+.modal p{
+    max-width: 300px;
+
+}
+.modal .error-msg{
+        margin: unset;
+        font-size: 12px;
+        color: #FD292F;
+        font-weight:600;
+        -webkit-text-stroke-width: .1px;
+        -webkit-text-stroke-color: black;
+}
+
+.signup {
+    background-color:#00ED64 !important;
+    margin-right:-42%;
+    border:1px solid #00684A;
+    color:#001E2B;
+    font-weight:500;
+    @media (max-width: 500px) {
+          margin-right: -86%;
+        }
+}
+
+.signup #input-item{
+    width: 95%;
+    height:30px;
+    border-radius: 5px;
+    background-color: #061621;
+    border-color: black;
+    color: #00ED64;
+    text-align:center;
+    box-shadow: 2px 2px white;
+}
+
+.signup #input-item::placeholder{
+    color: #00ED64;
+    text-align:center;
+}
+
+.signup button {
+    background-color:#061621;
+    color:#00ED64;
+    width:70%;
+    height:30px;
+    border-radius:6px;
+    box-shadow: 2px 2px white;
+}
+
+.signup .login-state-toggle {
+    margin-top: -10px;
+    font-size:10px;
+    text-align: right;
+    font-weight:500;
+}
+
+.signin {
+    background-color:#061621 !important;
+    margin-top:50px;
+    border:1px solid #061621;
+    color:#00ED64;
+    font-weight:500;
+}
+
+.signin #input-item{
+    width: 95%;
+    height:30px;
+    border-radius: 5px;
+    background-color: #00ED64;
+    border-color: black;
+    color: #061621;
+    text-align:center;
+    box-shadow: 2px 2px white;
+}
+.signin #input-item::placeholder{
+    color: #061621;
+    text-align:center;
+}
+
+.signin button {
+    background-color:#00ED64;
+    color:#061621;
+    width:70%;
+    height:30px;
+    border-radius:6px;
+    box-shadow: 2px 2px white;
+}
+
+.signin .login-state-toggle {
+    margin-bottom: -10px;
+    font-size:10px;
+    text-align: right;
+    font-weight:500;
+}
+
+.auth-wrapper .modal:hover {
+    z-index:10000;
+
+}
