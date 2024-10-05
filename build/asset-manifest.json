@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/https//vidhugkrishna.github.io/smp-react/static/css/main.cd2e088d.css",
+    "main.js": "/https//vidhugkrishna.github.io/smp-react/static/js/main.e2c76eff.js",
+    "static/js/453.5aad541f.chunk.js": "/https//vidhugkrishna.github.io/smp-react/static/js/453.5aad541f.chunk.js",
+    "index.html": "/https//vidhugkrishna.github.io/smp-react/index.html",
+    "main.cd2e088d.css.map": "/https//vidhugkrishna.github.io/smp-react/static/css/main.cd2e088d.css.map",
+    "main.e2c76eff.js.map": "/https//vidhugkrishna.github.io/smp-react/static/js/main.e2c76eff.js.map",
+    "453.5aad541f.chunk.js.map": "/https//vidhugkrishna.github.io/smp-react/static/js/453.5aad541f.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.cd2e088d.css",
+    "static/js/main.e2c76eff.js"
+  ]
+}
