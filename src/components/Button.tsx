@@ -1,7 +1,10 @@
 import { FC } from "react";
 
 interface ButtonComponentProps {
-    Button: string;
+    label: string;
+    onClick:React.Dispatch<React.SetStateAction<any>>;
+    name?:string;
+    classNames?:string;
   }
 
 
@@ -10,7 +13,7 @@ const Button:FC<ButtonComponentProps> = (props)=>{
 
     return  (
         <div className="button-wrapper">
-            <button type="submit">{props.Button}</button>
+            <button onClick={props.onClick} className={props.classNames} name={props.name} type="submit" >{props.label}</button>
         </div>
     )
 }
